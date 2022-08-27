@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.MainActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragTop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/dashLine1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintDimensionRatio="8:7"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vTop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnAddTop"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:backgroundTint="@color/light_green"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_add_white"
+                app:fabSize="mini"
+                app:borderWidth="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/dashLine1"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:background="@drawable/dash_line_gray"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/fragBottom"
+            app:layout_constraintEnd_toStartOf="@id/btnShuffle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragTop" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnShuffle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:backgroundTint="@color/light_green"
+            android:maxWidth="@dimen/_30sdp"
+            android:maxHeight="@dimen/_30sdp"
+            app:borderWidth="0dp"
+            android:src="@drawable/ic_shuffle_green"
+            app:layout_constraintBottom_toTopOf="@id/fragBottom"
+            app:layout_constraintEnd_toStartOf="@id/dashLine2"
+            app:layout_constraintStart_toEndOf="@id/dashLine1"
+            app:layout_constraintTop_toBottomOf="@id/fragTop" />
+
+        <View
+            android:id="@+id/dashLine2"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:background="@drawable/dash_line_gray"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/fragBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnShuffle"
+            app:layout_constraintTop_toBottomOf="@id/fragTop" />
+
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/btnFav"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="@dimen/_30sdp"-->
+<!--            app:srcCompat="@drawable/fav_button_click"-->
+<!--            android:backgroundTint="@color/white"-->
+<!--            app:fabSize="mini"-->
+<!--            app:borderWidth="0dp"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/fragBottom"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/fragTop" />-->
+        <ToggleButton
+            android:id="@+id/btnFav"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/fav_button_click"
+            android:textOff=""
+            android:textOn=""
+            app:layout_constraintBottom_toTopOf="@id/fragBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragTop" />
+        <!--        <View-->
+        <!--            android:id="@+id/dashLine3"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="5dp"-->
+        <!--            android:background="@drawable/dash_line_gray"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            app:layout_constraintBottom_toTopOf="@id/fragBottom"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toEndOf="@id/ivFav"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/fragTop" />-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragBottom"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintDimensionRatio="8:7"
+            app:layout_constraintTop_toBottomOf="@id/dashLine1">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vBottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnAddBottom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:backgroundTint="@color/light_green"
+                android:src="@drawable/ic_add_white"
+                app:fabSize="mini"
+                app:borderWidth="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
