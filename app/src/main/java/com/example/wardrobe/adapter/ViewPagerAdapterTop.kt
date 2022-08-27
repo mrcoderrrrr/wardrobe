@@ -9,7 +9,6 @@ import com.example.wardrobe.R
 import com.example.wardrobe.databinding.ItemTopViewpagerBinding
 import com.example.wardrobe.model.TopImageModel
 import com.squareup.picasso.Picasso
-import java.security.AccessControlContext
 
 class ViewPagerAdapterTop(var context:Context, var images: ArrayList<TopImageModel>):RecyclerView.Adapter<ViewPagerAdapterTop.ViewPagerViewHolder>(){
     inner class ViewPagerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -23,7 +22,7 @@ class ViewPagerAdapterTop(var context:Context, var images: ArrayList<TopImageMod
 
     override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
         Picasso.get()
-            .load(images.get(position).imagePath)
+            .load(images[position].imagePath)
             .centerCrop()
             .resize(300,300)
             .into(holder.dataBinding.ivTop)

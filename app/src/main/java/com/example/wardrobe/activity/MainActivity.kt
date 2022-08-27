@@ -32,7 +32,7 @@ open class MainActivity : AppCompatActivity() {
     private lateinit var dataBinding: ActivityMainBinding
     private lateinit var imageTop: ArrayList<TopImageModel>
     private lateinit var imageBottom: ArrayList<BottomImageModel>
-    private lateinit var favCombo:ArrayList<FavComboModel>
+    private lateinit var favCombo: ArrayList<FavComboModel>
     private lateinit var dialog: Dialog
     private lateinit var pickImageTop: ActivityResultLauncher<Intent>
     private lateinit var pickImageBottom: ActivityResultLauncher<Intent>
@@ -121,9 +121,9 @@ open class MainActivity : AppCompatActivity() {
     private fun openCameraTop() {
         openCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
             ActivityResultCallback {
-                resultTop = it.data?.data.toString()
+               /* resultTop = it.data?.data.toString()
                 camImageTopModel = TopImageModel(0, resultTop!!)
-                TopImageDatabase.getInstance(this)?.topImageDao()?.userInsert(camImageTopModel!!)
+                TopImageDatabase.getInstance(this)?.topImageDao()?.userInsert(camImageTopModel!!)*/
             })
     }
 
@@ -151,10 +151,10 @@ open class MainActivity : AppCompatActivity() {
     private fun openCameraBottom() {
         openCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
             ActivityResultCallback {
-                camImageBottomModel = BottomImageModel(0, it?.data?.data.toString())
+             /*   camImageBottomModel = BottomImageModel(0, it?.data?.data.toString())
                 BottomImageDatabase.getInstance(this)?.bottomImageDao()?.userInsert(
                     camImageBottomModel!!
-                )
+                )*/
             })
     }
 
@@ -176,7 +176,7 @@ open class MainActivity : AppCompatActivity() {
             dialog.dismiss()
         }
         no.setOnClickListener {
-            dataBinding.btnFav.isChecked=false
+            dataBinding.btnFav.isChecked = false
             //deleteCombo()
             dialog.dismiss()
         }

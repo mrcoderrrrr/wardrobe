@@ -3,13 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1935" />
         <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/dash_line_gray.xml" value="0.222" />
         <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/fav_button_click.xml" value="0.222" />
+        <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/ic_add_circle_green.xml" value="0.1935" />
         <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/ic_add_green.xml" value="0.222" />
+        <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/ic_add_white.xml" value="0.1935" />
+        <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/ic_camera_black.xml" value="0.1935" />
+        <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/ic_image_black.xml" value="0.1935" />
+        <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1935" />
         <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/ic_like_heart_green.xml" value="0.222" />
+        <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/ic_like_heart_red.xml" value="0.1935" />
         <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/ic_shuffle_green.xml" value="0.222" />
         <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/round_red_background.xml" value="0.222" />
+        <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/round_red_like_button.xml" value="0.1935" />
         <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/round_white_background.xml" value="0.222" />
+        <entry key="..\:/Android/WEQ Technology/app/src/main/res/drawable/round_white_like_button.xml" value="0.1935" />
         <entry key="..\:/Android/WEQ Technology/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Android/WEQ Technology/app/src/main/res/layout/dialog_fav_combo.xml" value="0.3614583333333333" />
         <entry key="..\:/Android/WEQ Technology/app/src/main/res/layout/dialog_pick_image.xml" value="0.3625" />

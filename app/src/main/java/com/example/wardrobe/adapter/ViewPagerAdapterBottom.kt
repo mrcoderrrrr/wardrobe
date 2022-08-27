@@ -22,7 +22,7 @@ class ViewPagerAdapterBottom(var context:Context, var images: ArrayList<BottomIm
 
     override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
         Picasso.get()
-            .load(images.get(position).imagePath)
+            .load(images[position].imagePath)
             .centerCrop()
             .resize(300,300)
             .into(holder.dataBinding.ivBottom)
