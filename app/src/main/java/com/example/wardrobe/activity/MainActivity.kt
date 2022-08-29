@@ -9,6 +9,8 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.Menu
+import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.TextView
@@ -63,6 +65,22 @@ open class MainActivity : AppCompatActivity() {
         setClick()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val menuInflater = getMenuInflater()
+        menuInflater.inflate(R.menu.menu_bar, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.favMenu -> {
+                startActivity(Intent(this, FavouriteActivity::class.java))
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+        return true
+    }
 
     //set Click
     private fun setClick() {
@@ -180,7 +198,8 @@ open class MainActivity : AppCompatActivity() {
                 ActivityResultCallback {
                     resultBottom = it?.data?.data.toString()
                     pickImageBottomModel = BottomImageModel(0, resultBottom!!)
-                    Toast.makeText(this,"Bottom : "+resultBottom.toString(),Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Bottom : " + resultBottom.toString(), Toast.LENGTH_LONG)
+                        .show()
                     BottomImageDatabase.getInstance(this)?.bottomImageDao()
                         ?.userInsert(pickImageBottomModel!!)
                 })
