@@ -1,10 +1,12 @@
 package com.example.wardrobe.activity
 
-import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.ViewGroup
@@ -15,6 +17,7 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import com.example.wardrobe.R
 import com.example.wardrobe.adapter.ViewPagerAdapterBottom
@@ -26,6 +29,8 @@ import com.example.wardrobe.databinding.ActivityMainBinding
 import com.example.wardrobe.model.BottomImageModel
 import com.example.wardrobe.model.FavComboModel
 import com.example.wardrobe.model.TopImageModel
+import java.io.*
+import java.lang.ref.WeakReference
 
 
 open class MainActivity : AppCompatActivity() {
@@ -36,7 +41,9 @@ open class MainActivity : AppCompatActivity() {
     private lateinit var dialog: Dialog
     private lateinit var pickImageTop: ActivityResultLauncher<Intent>
     private lateinit var pickImageBottom: ActivityResultLauncher<Intent>
-    private lateinit var openCamera: ActivityResultLauncher<Intent>
+    private lateinit var openCameraTop: ActivityResultLauncher<Intent>
+    private lateinit var openCameraBottom: ActivityResultLauncher<Intent>
+
     private var pickImageTopModel: TopImageModel? = null
     private var camImageTopModel: TopImageModel? = null
     private var pickImageBottomModel: BottomImageModel? = null
@@ -44,6 +51,7 @@ open class MainActivity : AppCompatActivity() {
     private var favComboModel: FavComboModel? = null
     private var resultTop: String? = null
     private var resultBottom: String? = null
+    var bitmap: Bitmap? = null
 
 
     private var chechFav: Int = 0
@@ -119,13 +127,50 @@ open class MainActivity : AppCompatActivity() {
 
     //Open Camera
     private fun openCameraTop() {
-        openCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
+        openCameraTop = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
             ActivityResultCallback {
-               /* resultTop = it.data?.data.toString()
-                camImageTopModel = TopImageModel(0, resultTop!!)
-                TopImageDatabase.getInstance(this)?.topImageDao()?.userInsert(camImageTopModel!!)*/
+                if (it.resultCode == RESULT_OK && it.data != null) {
+                    val bundle = it.data!!.extras
+                    val imageUri: Uri
+                    val bitmap: Bitmap = bundle!!.get("data") as Bitmap
+                    val weakReference = WeakReference<Bitmap>(
+                        Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, false).copy(
+                            Bitmap.Config.RGB_565, true
+                        )
+                    )
+                    val topBitmap: Bitmap? = weakReference.get()
+                    imageUri = saveImageTop(topBitmap, this)
+                    camImageTopModel = TopImageModel(0, imageUri.toString())
+                    TopImageDatabase.getInstance(this)?.topImageDao()
+                        ?.userInsert(camImageTopModel!!)
+                }
             })
     }
+
+    //save camera image in gallery to get path of image
+    private fun saveImageTop(topImage: Bitmap?, context: Context): Uri {
+        val topImageFolder = File(context.cacheDir, "topImages")
+        var uri: Uri? = null
+        try {
+            topImageFolder.mkdirs()
+            val file = File(topImageFolder, "captured_image.jpg")
+            val fo = FileOutputStream(file)
+            topImage!!.compress(Bitmap.CompressFormat.JPEG, 100, fo)
+            fo.flush()
+            fo.flush()
+            uri = FileProvider.getUriForFile(
+                context.applicationContext,
+                "com.example.wardrobe" + ".provider",
+                file
+            )
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return uri!!
+    }
+
 
     //pick image from bottom
     private fun pickImageBottom() {
@@ -135,6 +180,7 @@ open class MainActivity : AppCompatActivity() {
                 ActivityResultCallback {
                     resultBottom = it?.data?.data.toString()
                     pickImageBottomModel = BottomImageModel(0, resultBottom!!)
+                    Toast.makeText(this,"Bottom : "+resultBottom.toString(),Toast.LENGTH_LONG).show()
                     BottomImageDatabase.getInstance(this)?.bottomImageDao()
                         ?.userInsert(pickImageBottomModel!!)
                 })
@@ -149,13 +195,50 @@ open class MainActivity : AppCompatActivity() {
 
 
     private fun openCameraBottom() {
-        openCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
-            ActivityResultCallback {
-             /*   camImageBottomModel = BottomImageModel(0, it?.data?.data.toString())
-                BottomImageDatabase.getInstance(this)?.bottomImageDao()?.userInsert(
-                    camImageBottomModel!!
-                )*/
-            })
+        openCameraBottom =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
+                ActivityResultCallback {
+                    if (it.resultCode == RESULT_OK && it.data != null) {
+                        val bundle = it.data!!.extras
+                        val imageUri: Uri
+                        val bitmap: Bitmap = bundle!!.get("data") as Bitmap
+                        val weakReference = WeakReference<Bitmap>(
+                            Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, false)
+                                .copy(
+                                    Bitmap.Config.RGB_565, true
+                                )
+                        )
+                        val bottomBitmap: Bitmap? = weakReference.get()
+                        imageUri = saveImageBottom(bottomBitmap, this)
+                        camImageBottomModel = BottomImageModel(0, imageUri.toString())
+                        BottomImageDatabase.getInstance(this)?.bottomImageDao()?.userInsert(
+                            camImageBottomModel!!
+                        )
+                    }
+                })
+    }
+
+    private fun saveImageBottom(bottomImage: Bitmap?, context: Context): Uri {
+        val bottomImageFolder = File(context.cacheDir, "bottomImages")
+        var uri: Uri? = null
+        try {
+            bottomImageFolder.mkdirs()
+            val file = File(bottomImageFolder, "captured_images.jpg")
+            val fo = FileOutputStream(file)
+            bottomImage!!.compress(Bitmap.CompressFormat.JPEG, 100, fo)
+            fo.flush()
+            fo.flush()
+            uri = FileProvider.getUriForFile(
+                context.applicationContext,
+                "com.example.wardrobe" + ".provider",
+                file
+            )
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return uri!!
     }
 
     //dialog box for combo
@@ -217,7 +300,7 @@ open class MainActivity : AppCompatActivity() {
         //open camera
         openCam.setOnClickListener {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            pickImageTop.launch(intent)
+            openCameraTop.launch(intent)
             dialog.dismiss()
         }
 
@@ -253,7 +336,7 @@ open class MainActivity : AppCompatActivity() {
         //open camera
         openCam.setOnClickListener {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            pickImageTop.launch(intent)
+            openCameraBottom.launch(intent)
             dialog.dismiss()
         }
 
@@ -264,7 +347,6 @@ open class MainActivity : AppCompatActivity() {
     }
 
     //Viewpager Top
-    @SuppressLint("NotifyDataSetChanged")
     private fun viewPagerTop() {
         imageTop = ArrayList()
         imageTop = TopImageDatabase.getInstance(this)?.topImageDao()!!
@@ -275,7 +357,6 @@ open class MainActivity : AppCompatActivity() {
     }
 
     //ViewPager Bottom
-    @SuppressLint("NotifyDataSetChanged")
     private fun viewPagerBottom() {
         imageBottom = ArrayList()
         imageBottom = BottomImageDatabase.getInstance(this)?.bottomImageDao()!!

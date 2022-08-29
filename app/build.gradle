@@ -53,4 +53,9 @@ dependencies {
     kapt "androidx.room:room-compiler:$roomVersion"
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+    def lifecycleVersion = '2.5.1'
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
 }

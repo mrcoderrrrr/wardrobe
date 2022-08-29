@@ -24,6 +24,15 @@
         <entry key="..\:/Android/WEQ Technology/app/src/main/res/layout/dialog_pick_image.xml" value="0.3625" />
         <entry key="..\:/Android/WEQ Technology/app/src/main/res/layout/item_bottom_viewpager.xml" value="0.184375" />
         <entry key="..\:/Android/WEQ Technology/app/src/main/res/layout/item_top_viewpager.xml" value="0.3614583333333333" />
+        <entry key="..\:/Practice/Wardrobe/app/src/main/res/drawable/fav_button_click.xml" value="0.1" />
+        <entry key="..\:/Practice/Wardrobe/app/src/main/res/drawable/ic_add_circle_green.xml" value="0.1" />
+        <entry key="..\:/Practice/Wardrobe/app/src/main/res/drawable/ic_add_green.xml" value="0.1" />
+        <entry key="..\:/Practice/Wardrobe/app/src/main/res/drawable/ic_camera_black.xml" value="0.1" />
+        <entry key="..\:/Practice/Wardrobe/app/src/main/res/drawable/ic_image_black.xml" value="0.1" />
+        <entry key="..\:/Practice/Wardrobe/app/src/main/res/drawable/ic_like_heart_green.xml" value="0.1" />
+        <entry key="..\:/Practice/Wardrobe/app/src/main/res/drawable/ic_like_heart_red.xml" value="0.1" />
+        <entry key="..\:/Practice/Wardrobe/app/src/main/res/drawable/round_red_like_button.xml" value="0.1" />
+        <entry key="..\:/Practice/Wardrobe/app/src/main/res/xml/file_provider_path.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
