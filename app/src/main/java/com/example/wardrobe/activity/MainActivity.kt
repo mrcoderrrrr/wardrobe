@@ -99,20 +99,10 @@ open class MainActivity : AppCompatActivity() {
             if (isChecked) {
                 chechFav = 1
                 dialogFavCombo()
-                Toast.makeText(this, "CheckedTrue$chechFav", Toast.LENGTH_LONG).show()
             } else {
                 chechFav = 0
-                Toast.makeText(this, "CheckedFalse$chechFav", Toast.LENGTH_LONG).show()
             }
         })
-        //        if (dataBinding.btnFav.isChecked==true){
-//            chechFav=1
-//            Toast.makeText(this,"CheckedTrue"+chechFav,Toast.LENGTH_LONG).show()
-//        }
-//        else if (dataBinding.btnFav.isChecked==false){
-//            chechFav=0
-//            Toast.makeText(this,"CheckedFalse"+chechFav,Toast.LENGTH_LONG).show()
-//        }
     }
 
     private fun savedFavCombo() {
@@ -143,7 +133,7 @@ open class MainActivity : AppCompatActivity() {
         }
     }
 
-    //Open Camera
+    //Open Camera Top
     private fun openCameraTop() {
         openCameraTop = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
             ActivityResultCallback {
@@ -151,13 +141,7 @@ open class MainActivity : AppCompatActivity() {
                     val bundle = it.data!!.extras
                     val imageUri: Uri
                     val bitmap: Bitmap = bundle!!.get("data") as Bitmap
-                    val weakReference = WeakReference<Bitmap>(
-                        Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, false).copy(
-                            Bitmap.Config.RGB_565, true
-                        )
-                    )
-                    val topBitmap: Bitmap? = weakReference.get()
-                    imageUri = saveImageTop(topBitmap, this)
+                    imageUri = saveImageTop(bitmap, this)
                     camImageTopModel = TopImageModel(0, imageUri.toString())
                     TopImageDatabase.getInstance(this)?.topImageDao()
                         ?.userInsert(camImageTopModel!!)
@@ -198,8 +182,6 @@ open class MainActivity : AppCompatActivity() {
                 ActivityResultCallback {
                     resultBottom = it?.data?.data.toString()
                     pickImageBottomModel = BottomImageModel(0, resultBottom!!)
-                    Toast.makeText(this, "Bottom : " + resultBottom.toString(), Toast.LENGTH_LONG)
-                        .show()
                     BottomImageDatabase.getInstance(this)?.bottomImageDao()
                         ?.userInsert(pickImageBottomModel!!)
                 })
@@ -212,7 +194,7 @@ open class MainActivity : AppCompatActivity() {
         }
     }
 
-
+//open camera bottom
     private fun openCameraBottom() {
         openCameraBottom =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
@@ -221,14 +203,7 @@ open class MainActivity : AppCompatActivity() {
                         val bundle = it.data!!.extras
                         val imageUri: Uri
                         val bitmap: Bitmap = bundle!!.get("data") as Bitmap
-                        val weakReference = WeakReference<Bitmap>(
-                            Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, false)
-                                .copy(
-                                    Bitmap.Config.RGB_565, true
-                                )
-                        )
-                        val bottomBitmap: Bitmap? = weakReference.get()
-                        imageUri = saveImageBottom(bottomBitmap, this)
+                        imageUri = saveImageBottom(bitmap, this)
                         camImageBottomModel = BottomImageModel(0, imageUri.toString())
                         BottomImageDatabase.getInstance(this)?.bottomImageDao()?.userInsert(
                             camImageBottomModel!!
@@ -236,7 +211,7 @@ open class MainActivity : AppCompatActivity() {
                     }
                 })
     }
-
+//save image in gallery to get path of camera image
     private fun saveImageBottom(bottomImage: Bitmap?, context: Context): Uri {
         val bottomImageFolder = File(context.cacheDir, "bottomImages")
         var uri: Uri? = null
@@ -284,14 +259,6 @@ open class MainActivity : AppCompatActivity() {
         }
         dialog.show()
     }
-//delete fav combo
-//    private fun deleteCombo() {
-//        favCombo= ArrayList()
-//        favCombo= FavComboDatabase.getInstance(this)?.favComboDao()?.userViewData() as ArrayList<FavComboModel>
-//        for (i in 0 until favCombo.size) {
-//                FavComboDatabase.getInstance(this)!!.favComboDao().userDeleteData(favCombo[i].id)
-//        }
-//    }
 
     //Dialog Box
     private fun dialogBoxTop() {
