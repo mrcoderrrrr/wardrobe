@@ -14,7 +14,6 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -31,30 +30,27 @@ import com.example.wardrobe.databinding.ActivityMainBinding
 import com.example.wardrobe.model.BottomImageModel
 import com.example.wardrobe.model.FavComboModel
 import com.example.wardrobe.model.TopImageModel
-import java.io.*
-import java.lang.ref.WeakReference
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
 
 
 open class MainActivity : AppCompatActivity() {
     private lateinit var dataBinding: ActivityMainBinding
     private lateinit var imageTop: ArrayList<TopImageModel>
     private lateinit var imageBottom: ArrayList<BottomImageModel>
-    private lateinit var favCombo: ArrayList<FavComboModel>
     private lateinit var dialog: Dialog
     private lateinit var pickImageTop: ActivityResultLauncher<Intent>
     private lateinit var pickImageBottom: ActivityResultLauncher<Intent>
     private lateinit var openCameraTop: ActivityResultLauncher<Intent>
     private lateinit var openCameraBottom: ActivityResultLauncher<Intent>
-
     private var pickImageTopModel: TopImageModel? = null
     private var camImageTopModel: TopImageModel? = null
     private var pickImageBottomModel: BottomImageModel? = null
     private var camImageBottomModel: BottomImageModel? = null
     private var favComboModel: FavComboModel? = null
-    private var resultTop: String? = null
     private var resultBottom: String? = null
-    var bitmap: Bitmap? = null
-
 
     private var chechFav: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -10,7 +10,7 @@ import com.example.wardrobe.databinding.ItemFavViewpagerBinding
 import com.example.wardrobe.model.FavComboModel
 import com.squareup.picasso.Picasso
 
-class ViewPagerAdapterFavourite(var context: Context, var images: ArrayList<FavComboModel>):RecyclerView.Adapter<ViewPagerAdapterFavourite.ViewPagerViewHolder>() {
+class ViewPagerAdapterFavourite(var context: Context, private var images: ArrayList<FavComboModel>):RecyclerView.Adapter<ViewPagerAdapterFavourite.ViewPagerViewHolder>() {
     inner class ViewPagerViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
         val dataBinding:ItemFavViewpagerBinding=ItemFavViewpagerBinding.bind(itemView)
     }

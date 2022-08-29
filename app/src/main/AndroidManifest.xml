@@ -4,7 +4,6 @@
     package="com.example.wardrobe">
 
     <uses-feature android:name="android.hardware.camera" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -23,7 +22,6 @@
         <activity
             android:name=".activity.FavouriteActivity"
             android:exported="false" />
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

@@ -10,7 +10,7 @@ import com.example.wardrobe.databinding.ItemBottomViewpagerBinding
 import com.example.wardrobe.model.BottomImageModel
 import com.squareup.picasso.Picasso
 
-class ViewPagerAdapterBottom(var context:Context, var images: ArrayList<BottomImageModel>):RecyclerView.Adapter<ViewPagerAdapterBottom.ViewPagerViewHolder>() {
+class ViewPagerAdapterBottom(var context:Context, private var images: ArrayList<BottomImageModel>):RecyclerView.Adapter<ViewPagerAdapterBottom.ViewPagerViewHolder>() {
     class ViewPagerViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         val dataBinding:ItemBottomViewpagerBinding=ItemBottomViewpagerBinding.bind(itemView)
     }

@@ -13,6 +13,4 @@ interface FavComboDao {
     @Query("SELECT * FROM favcombo")
     fun userViewData():List<FavComboModel>
 
-/*    @Query("DELETE FROM favcombo WHERE id=id")
-    fun userDeleteData():List<FavComboModel>*/
 }
